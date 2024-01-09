@@ -6,7 +6,7 @@ const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
 export function getPosts() {
-  console.log(getPosts)
+  // console.log(getPosts)
   return fetch(postsHost, {
     method: "GET",
     headers: {
@@ -17,7 +17,6 @@ export function getPosts() {
       if (response.status === 401) {
         throw new Error("Нет авторизации");
       }
-
       return response.json();
     })
     .then((data) => {
@@ -29,7 +28,7 @@ export function getPosts() {
 export function registerUser({ login, password, name, imageUrl }) {
   return fetch(baseHost + "/api/user", {
     method: "POST",
-    body: JSON.stringify({
+    body: Text.stringify({
       login,
       password,
       name,

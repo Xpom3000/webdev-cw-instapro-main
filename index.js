@@ -69,7 +69,7 @@ export const goToPage = (newPage, data) => {
 
     if (newPage === USER_POSTS_PAGE) {
       // TODO: реализовать получение постов юзера из API
-      console.log("Открываю страницу пользователя: ", data.userId);
+      console.log("Открываю страницу пользователя:", data.userId);
       page = USER_POSTS_PAGE;
       posts = [];
       fetchAndRenderPosts(posts);
@@ -136,7 +136,7 @@ const renderApp = () => {
 export const fetchAndRenderPosts = (posts) => {
   getPosts({ token: getToken() })
     .then((responseData) => {
-      console.log(responseData.posts);
+      console.log(posts);
     const appPosts = responseData.posts.map((post) => {
       return {
         id: post.id,
@@ -146,7 +146,6 @@ export const fetchAndRenderPosts = (posts) => {
         name:post.user.name,
         likes: post.likes,
         isLiked: post.isLiked,
-       
       };
     });
     posts = appPosts;
@@ -154,7 +153,5 @@ export const fetchAndRenderPosts = (posts) => {
   });
 };  
 fetchAndRenderPosts(posts);
-
-
 
 goToPage(POSTS_PAGE);

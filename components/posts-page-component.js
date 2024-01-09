@@ -4,31 +4,30 @@ import { posts, goToPage, fetchAndRenderPosts } from "../index.js";
 
 export function renderPostsPageComponent() {
   // TODO: реализовать рендер постов из api
-  console.log("Актуальный список постов:", posts);
+  console.log("Актуальный список постов:");
   const appElement = document.getElementById("app");
-  console.log(1)
-  fetchAndRenderPosts(posts);
-  const postHtml = posts
+  // fetchAndRenderPosts(posts);
+  const appEl = posts
     .map((post) => {
-      console.log(1)
+      console.log(post)
       return `
         <li class="post" id="post">
           <div class="post-header" data-user-id="${id}" id="post">
               <img src=${post.imageUrl}>
-              <p class="post-header__user-name">${post.name}</p>
+              <p class="post-header__user-name">${post.user.name}</p>
           </div>
       
           <div class="post-image-container">
-            <img class="post-image" src="${imageUrl}">
+            <img class="post-image" src="${post.user.imageUrl}">
           </div>
           <div class="post-likes">
-            <button data-post-id="${post.id}" class="${post.isliked ? "like-button like-active" : "like-button"}">
+            <button data-post-id="${post.likes.id}" class="${post.isliked ? "like-button like-active" : "like-button"}">
               <img src="like-not-active">
             </button>
-            <p class="post-likes-text">Нравится: <strong>${post.likes}</strong></p>
+            <p class="post-likes-text">Нравится: <strong>${post.likes.id}</strong></p>
           </div>
           <p class="post-text">
-            <span class="user-name">${post.name}</span>${post.description}</p>
+            <span class="user-name">${post.user.name}</span>${post.description}</p>
           <p class="post-date">${post.createdAt}</p>
         </li>
       `
@@ -41,9 +40,7 @@ export function renderPostsPageComponent() {
   const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
-      <ul class="posts" id="posts">${postHtml}</ul>
-      
-
+      <ul class="posts" id="posts">${appEl}</ul>
     </div>`;
 
     appElement.innerHTML = appHtml;
