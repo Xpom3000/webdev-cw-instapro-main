@@ -56,6 +56,7 @@ export const goToPage = (newPage, data) => {
 
       return getPosts({ token: getToken() })
         .then((newPosts) => {
+          console.log(newPosts);
           page = POSTS_PAGE;
           posts = newPosts;
           renderApp();
@@ -133,25 +134,26 @@ const renderApp = () => {
   }
 };
 
-export const fetchAndRenderPosts = (posts) => {
-  getPosts({ token: getToken() })
-    .then((responseData) => {
-      console.log(posts);
-    const appPosts = responseData.posts.map((post) => {
-      return {
-        id: post.id,
-        imageUrl: post.imageUrl,
-        createdAt: post.createdAt,
-        description: post.description,
-        name:post.user.name,
-        likes: post.likes,
-        isLiked: post.isLiked,
-      };
-    });
-    posts = appPosts;
-    renderPostsPageComponent(posts);
-  });
-};  
-fetchAndRenderPosts(posts);
+// export const fetchAndRenderPosts = (posts) => {
+//   getPosts({ token: getToken() })
+//     .then((responseData) => {
+//       console.log(posts);
+//       const appPosts = responseData.posts.map((post) => {
+//       console.log(responseData)
+//       return {
+//         id: post.id,
+//         imageUrl: post.imageUrl,
+//         createdAt: post.createdAt,
+//         description: post.description,
+//         name:post.user.name,
+//         likes: post.likes,
+//         isLiked: post.isLiked,
+//       };
+//     });
+//     posts = appPosts;
+//     renderPostsPageComponent(posts);
+//   });
+// };  
+// fetchAndRenderPosts(posts);
 
 goToPage(POSTS_PAGE);
