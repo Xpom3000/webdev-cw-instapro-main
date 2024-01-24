@@ -13,7 +13,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
             <div class="upload-image-container"></div>
             <label>
               Опишите фотографию:
-              <textarea id="textarea-input" class="input textarea" rows="4"></textarea>
+              <textarea id="textarea-input" class="input textarea"></textarea>
             </label>
             <button class="button" id="add-button">Добавить</button>
           </div>
@@ -35,7 +35,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     }
     document.getElementById("add-button").addEventListener("click", () => {
       onAddPostClick({
-        description: appEl.querySelector(".text").value,
+        description: appEl.querySelector(".textarea").value,
         imageUrl,
       });
     });

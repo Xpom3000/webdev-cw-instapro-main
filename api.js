@@ -28,7 +28,7 @@ export function getPosts({ token }) {
 }
 
 export function getUserPosts({ id}) {
-  // console.log(id)
+  console.log(id)
   return fetch(`${userHost}/${id}`, {
     method: "GET",
     headers: {
@@ -75,21 +75,22 @@ export function deletePost({ id }) {
 }
 
 export function like({ id }) {
-  // console.log(likeComment);
+  console.log(id);
   return fetch(`${postsHost}/${id}/like`, {
     method: "POST",
     headers: {
       Authorization: getToken(),
     },
-  }).then((response) => {
+  })
+    .then((response) => {
     return response.json();
   })
-    .then(data => {
-    return data.post
-  })
+  //   .then(data => {
+  //   return data.post
+  // })
 }
 
-export function disLike({ id }) {
+export function disLike({ id}) {
   // console.log(likeComment);
   return fetch(`${postsHost}/${id}/dislike`, {
     method: "POST",

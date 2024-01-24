@@ -1,9 +1,9 @@
-import { USER_POSTS_PAGE } from "../routes.js";
+import { POSTS_PAGE, USER_POSTS_PAGE, } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken } from "../index.js";
 import { formatDistance} from 'date-fns'
 import { ru } from 'date-fns/locale'
-import { disLike } from "../api.js";
+import { disLike, like } from "../api.js";
 
 // const now = post.createdAt
 // const formatDate = formatDistance(post.createdAt , new Date(), { addSuffix: true, locale: ru })
@@ -15,7 +15,7 @@ export function renderPostsPageComponent() {
   let likes;
   const appElement = document.getElementById("app");
   const appEl = posts
-    .map((post) => {
+    .map((post, index) => {
       if (post.likes.length === 1) {
         likes = post.likes[0].name;
       }else if (post.likes.length > 1) {
@@ -40,10 +40,10 @@ export function renderPostsPageComponent() {
             <img class="post-image" src="${post.imageUrl}">
           </div>
           <div class="post-likes">
-            <button data-post-id="${post.likes.id}" class="like-button" >
+            <button data-post-id="${post.id}" data-is-liked="${post.isLiked}" class="like-button ${post.isLiked ? "-active-like" : ''}" data-index="${index}">
              ${likeImg}
             </button>
-            <p class="post-likes-text">Нравится: <strong>${post.likes.length}</strong></p>
+            <p class="post-likes-text">Нравится: <strong>: ${post.likes.length}</strong></p>
           </div>
           <p class="post-text">
             <span class="user-name">${post.user.name}</span>${post.description}</p>
@@ -65,21 +65,6 @@ export function renderPostsPageComponent() {
     element: document.querySelector(".header-container"),
   });
 
-  const likeButtonElement = document.querySelectorAll(".like-button");
-  for (let likeEl of likeButtonElement) {
-    likeEl.addEventListener("click", (event) => {
-      console.log("Привет", event.currentTarget.id);
-      const currentPost = posts.find(post => post.id === event.currentTarget.id);
-      if (currentPost.isLiked) {
-        disLike({
-          id: event.currentTarget.id, token: getToken()
-        }).then(() => {
-          renderHeaderComponent();
-        })
-      }
-      })
-    }
-
   for (let userEl of document.querySelectorAll(".post-header")) {
     userEl.addEventListener("click", () => {
       goToPage(USER_POSTS_PAGE, {
@@ -87,4 +72,42 @@ export function renderPostsPageComponent() {
       });
     });
   }
+  initLikeLisner();
+}
+
+export function initLikeLisner(userId) {
+  const likeButtonElement = document.querySelectorAll(".like-button");
+for (const likeElement of likeButtonElement) {
+  likeElement.addEventListener("click", () => {
+    console.log(likeElement.dataset);
+    // const currentPost = posts.find(post => post.id === event.currentTarget.id);
+    if (likeElement.dataset.isLiked === "true") {
+      disLike({
+        id: likeElement.dataset.postId, token: getToken()
+      })
+      .then(() => {
+        if (userId) {
+          goToPage(USER_POSTS_PAGE, { userId })
+        }
+        else {
+          goToPage(POSTS_PAGE, { noLoading: true })
+        }
+      })
+    }
+    else {
+      like({
+        id: likeElement.dataset.postId, token: getToken()
+      })
+      .then(() => {
+        if (userId) {
+          goToPage(USER_POSTS_PAGE, { userId })
+        }
+        else {
+          goToPage(POSTS_PAGE, { noLoading: true })
+        }
+      });
+    }
+  })
+}
+
 }
