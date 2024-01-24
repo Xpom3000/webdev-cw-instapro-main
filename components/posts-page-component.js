@@ -10,7 +10,7 @@ import { disLike, like } from "../api.js";
 
 export function renderPostsPageComponent() {
   // TODO: реализовать рендер постов из api
-  console.log("Актуальный список постов:", posts);
+  // console.log("Актуальный список постов:", posts);
   let likeImg;
   let likes;
   const appElement = document.getElementById("app");
@@ -18,7 +18,7 @@ export function renderPostsPageComponent() {
     .map((post, index) => {
       if (post.likes.length === 1) {
         likes = post.likes[0].name;
-      }else if (post.likes.length > 1) {
+      } if (post.likes.length > 1) {
         likes = `${post.likes[0].name} и еще ${post.likes.length - 1}`;
       } else {
         likes = ""
@@ -40,10 +40,10 @@ export function renderPostsPageComponent() {
             <img class="post-image" src="${post.imageUrl}">
           </div>
           <div class="post-likes">
-            <button data-post-id="${post.id}" data-is-liked="${post.isLiked}" class="like-button ${post.isLiked ? "-active-like" : ''}" data-index="${index}">
+            <button data-post-id="${post.id}" data-is-liked="${post.isLiked}" class="like-button ${post.isLiked ? "-active-like" :''} "data-index="${index}">
              ${likeImg}
             </button>
-            <p class="post-likes-text">Нравится: <strong>: ${post.likes.length}</strong></p>
+            <p class="post-likes-text">Нравится: <strong>${post.likes.length}</strong></p>
           </div>
           <p class="post-text">
             <span class="user-name">${post.user.name}</span>${post.description}</p>

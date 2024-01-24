@@ -63,7 +63,6 @@ export function addPost({ description, imageUrl }) {
 }
 
 export function deletePost({ id }) {
-  // console.log(likeComment);
   return fetch(`${postsHost}/${id}`, {
     method: "DELETE",
     headers: {
@@ -82,22 +81,22 @@ export function like({ id }) {
       Authorization: getToken(),
     },
   })
-    .then((response) => {
+  .then((response) => {
     return response.json();
   })
-  //   .then(data => {
-  //   return data.post
-  // })
+    .then(data => {
+    return data.post
+  })
 }
 
 export function disLike({ id}) {
-  // console.log(likeComment);
   return fetch(`${postsHost}/${id}/dislike`, {
     method: "POST",
     headers: {
       Authorization: getToken(),
     },
-  }).then((response) => {
+  })
+  .then((response) => {
     return response.json();
   });
 }
