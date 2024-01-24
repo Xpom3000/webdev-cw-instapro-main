@@ -1,10 +1,11 @@
 // Замени на свой, чтобы получить независимый от других набор данных.
 // "боевая" версия инстапро лежит в ключе prod
-// import { getToken} from "./index.js"
+import { getToken} from "./index.js"
 const personalKey = "prod";
+// const personalKey = "igror-shipitko";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
-// https://wedev-api.sky.pro/api/v1/:personal-key/instapro
+const userHost = `${baseHost}/api/v1/${personalKey}/instapro/user-posts`;
 
 export function getPosts({ token }) {
   // console.log(getPosts)
@@ -12,6 +13,7 @@ export function getPosts({ token }) {
     method: "GET",
     headers: {
       Authorization: token,
+      
     },
   })
     .then((response) => {
@@ -23,6 +25,41 @@ export function getPosts({ token }) {
     .then((data) => {
       return data.posts;
     });
+}
+
+export function getUserPosts({ id}) {
+  // console.log(id)
+  return fetch(`${userHost}/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: getToken(),
+    },
+  })
+    .then((response) => {
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      return data.posts;
+    });
+}
+
+export function addPost({ description, imageUrl }) {
+  // console.log(likeComment);
+  return fetch(postsHost, {
+    method: "POST",
+    headers: {
+      Authorization: getToken(),
+    },
+    body: JSON.stringify({
+      description,
+      imageUrl
+    }),
+  }).then((response) => {
+    return response.json();
+  });
 }
 
 export function like({ id }) {

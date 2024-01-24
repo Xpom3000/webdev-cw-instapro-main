@@ -1,15 +1,11 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken } from "../index.js";
-// import { format } from 'date-fns'
-// import { ru } from 'date-fns/locale'
+import { formatDistance} from 'date-fns'
+import { ru } from 'date-fns/locale'
 
-
-// const now = new Date();
-// const getDate = format(new Date(task.created_at), 'dd/MM/yyyy hh:mm')
-
-
-
+// const now = post.createdAt
+// const formatDate = formatDistance(post.createdAt , new Date(), { addSuffix: true, locale: ru })
 
 export function renderPostsPageComponent() {
   // TODO: реализовать рендер постов из api
@@ -50,15 +46,12 @@ export function renderPostsPageComponent() {
           </div>
           <p class="post-text">
             <span class="user-name">${post.user.name}</span>${post.description}</p>
-          <p class="post-date">${post.createdAt} назад </p>
+          <p class="post-date">${formatDistance(post.createdAt , new Date(), { addSuffix: true, locale: ru })}</p>
         </li>
       `
     })
     .join("");
-  /**
-   * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-   * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-   */
+
   const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
