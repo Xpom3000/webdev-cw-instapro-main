@@ -74,7 +74,7 @@ export function renderPostsPageComponent() {
   const likeButtonElement = document.querySelectorAll(".like-button");
   for (let likeEl of likeButtonElement) {
     likeEl.addEventListener("click", (event) => {
-      console.log(event.currentTarget.id);
+      console.log("Привет", event.currentTarget.id);
       const currentPost = posts.find(post => post.id === event.currentTarget.id);
       if (currentPost.isLiked) {
         disLike({
