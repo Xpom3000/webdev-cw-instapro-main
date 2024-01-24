@@ -3,6 +3,7 @@ import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken } from "../index.js";
 import { formatDistance} from 'date-fns'
 import { ru } from 'date-fns/locale'
+import { disLike } from "../api.js";
 
 // const now = post.createdAt
 // const formatDate = formatDistance(post.createdAt , new Date(), { addSuffix: true, locale: ru })

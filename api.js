@@ -62,6 +62,18 @@ export function addPost({ description, imageUrl }) {
   });
 }
 
+export function deletePost({ id }) {
+  // console.log(likeComment);
+  return fetch(`${postsHost}/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: getToken(),
+    },
+  }).then((response) => {
+    return response.json();
+  });
+}
+
 export function like({ id }) {
   // console.log(likeComment);
   return fetch(`${postsHost}/${id}/like`, {
@@ -71,7 +83,10 @@ export function like({ id }) {
     },
   }).then((response) => {
     return response.json();
-  });
+  })
+    .then(data => {
+    return data.post
+  })
 }
 
 export function disLike({ id }) {

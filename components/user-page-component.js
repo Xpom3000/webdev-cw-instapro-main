@@ -1,18 +1,14 @@
-// export const USER_POSTS_PAGE = "user-posts";
-
-// import { posts } from "../index.js";
 import { renderHeaderComponent } from "./header-component";
+import { formatDistance} from 'date-fns'
+import { ru } from 'date-fns/locale'
 
 export function renderUserPostsPage({posts}) {
-    // TODO: реализовать рендер постов из api
+    // TODO: реализован рендер постов из api
     console.log("Cписок постов юзера :", posts);
     let likeImg;
     let likes;
 
-  // const post
-
     const appElement = document.getElementById("app");
-    // console.log(data);
     const postEl = posts.map((post) => {
         
         if (post.likes.length === 1) {
@@ -46,7 +42,7 @@ export function renderUserPostsPage({posts}) {
             </div>
             <p class="post-text">
               <span class="user-name">${post.user.name}</span>${post.description}</p>
-            <p class="post-date">${post.createdAt} назад </p>
+            <p class="post-date">${formatDistance(post.createdAt , new Date(), { addSuffix: true, locale: ru })}</p>
           </li>
         `
       })
