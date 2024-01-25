@@ -1,7 +1,8 @@
 import { renderHeaderComponent } from "./header-component";
-import { formatDistance} from 'date-fns'
-import { ru } from 'date-fns/locale'
-import { initLikeLisner } from "./posts-page-component";
+import { formatDistance } from "date-fns";
+import { ru } from "date-fns/locale";
+import { initLikeLisner } from "../module/likes";
+// import { initDeleteButtonLisners } from "../module/delete";
 
 export function renderUserPostsPage({ posts }) {
   // TODO: реализован рендер постов из api
@@ -10,22 +11,23 @@ export function renderUserPostsPage({ posts }) {
   let likes;
 
   const appElement = document.getElementById("app");
-  const postEl = posts.map((post) => {
-    if (post.likes.length === 1) {
-      likes = post.likes[0].name;
-      console.log(post.likes[0].name)
-    } else if (post.likes.length > 1) {
-      likes = `${post.likes[0].name} и еще ${post.likes.length - 1}`;
-    } else {
-      likes = ""
-    }
+  const postEl = posts
+    .map((post) => {
+      if (post.likes.length === 1) {
+        likes = post.likes[0].name;
+        console.log(post.likes[0].name);
+      } else if (post.likes.length > 1) {
+        likes = `${post.likes[0].name} и еще ${post.likes.length - 1}`;
+      } else {
+        likes = "";
+      }
 
-    if (post.isLiked) {
-      likeImg = '<img src="./assets/images/like-active.svg"></img>';
-    } else {
-      likeImg = '<img src="./assets/images/like-not-active.svg"></img>';
-    }
-    return `
+      if (post.isLiked) {
+        likeImg = '<img src="./assets/images/like-active.svg"></img>';
+      } else {
+        likeImg = '<img src="./assets/images/like-not-active.svg"></img>';
+      }
+      return `
       <li class="post" id="user-posts">
         <div class="post-header" data-user-id="${post.user.id}">
             <img  class="post-header__user-image" src=${post.user.imageUrl}>
@@ -34,16 +36,28 @@ export function renderUserPostsPage({ posts }) {
         <div class="post-image-container">
           <img class="post-image" src="${post.imageUrl}">
         </div>
-        <div class="post-likes">
-        <button data-post-id="${post.id}" data-is-liked="${post.isLiked}" class="like-button ${post.isLiked ? "-active-like" : ''} "data-id="${post.user.id}">
-            ${likeImg}
-          </button>
-          <p class="post-likes-text">Нравится: <strong>${likes}</strong></p>
+        <div class="button-container">
+          <div class="post-likes">
+            <button data-post-id="${post.id}" data-is-liked="${
+              post.isLiked
+            }" class="like-button ${
+              post.isLiked ? "-active-like" : ""
+            } "data-id="${post.user.id}">
+              ${likeImg}
+            </button>
+            <p class="post-likes-text">Нравится: <strong>${likes}</strong></p>
+          </div>
+          <button  class="delete-form-button header-button logout-button" style="display:none" data-id="${post.id}">Удалить пост</button>
         </div>
-        <p class="post-text"><span class="user-name">${post.user.name}</span>: ${post.description}</p>
-        <p class="post-date">${formatDistance(post.createdAt, new Date(), { addSuffix: true, locale: ru })}</p>
-      </li>`
-  })
+        <p class="post-text"><span class="user-name">${
+          post.user.name
+        }</span>: ${post.description} </p>
+        <p class="post-date">${formatDistance(post.createdAt, new Date(), {
+          addSuffix: true,
+          locale: ru,
+        })}</p>
+      </li>`;
+    })
     .join("");
   /**
    * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
@@ -60,5 +74,5 @@ export function renderUserPostsPage({ posts }) {
     element: document.querySelector(".header-container"),
   });
   initLikeLisner(posts[0].user.id);
-  }
-  
+  // initDeleteButtonLisners({ id });
+}

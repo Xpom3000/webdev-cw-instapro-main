@@ -77,6 +77,10 @@
   max-width: 500px;
   object-fit: cover;
 }
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 .post-likes {
   display: flex;
@@ -97,6 +101,10 @@
 }
 .like-not-active {
   background-image: url(assets/images/like-not-active.svg)
+}
+
+.delete-form-button {
+  font-size: 14px;
 }
 
 .user-name {
