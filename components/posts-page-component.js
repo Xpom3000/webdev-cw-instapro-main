@@ -12,13 +12,13 @@ export function renderPostsPageComponent() {
   // TODO: реализовать рендер постов из api
   let likeImg;
   let likes;
+  console.log(likes)
   const appElement = document.getElementById("app");
   const appEl = posts
     .map((post, index) => {
       if (post.likes.length === 1) {
         likes = post.likes[0].name;
-      }
-      if (post.likes.length > 1) {
+      } else if (post.likes.length > 1) {
         likes = `${post.likes[0].name} и еще ${post.likes.length - 1}`;
       } else {
         likes = "";
@@ -32,33 +32,21 @@ export function renderPostsPageComponent() {
       return `
         <li class="post" id="post">
           <div class="post-header" data-user-id="${post.user.id}">
-              <img  class="post-header__user-image" src=${post.user.imageUrl}>
-              <p class="post-header__user-name">${post.user.name}</p>
+            <img  class="post-header__user-image" src=${post.user.imageUrl}>
+            <p class="post-header__user-name">${post.user.name}</p>
           </div>
-      
           <div class="post-image-container">
             <img class="post-image" src="${post.imageUrl}">
           </div>
           <div class="post-likes">
-            <button data-post-id="${post.id}" data-is-liked="${
-              post.isLiked
-            }" class="like-button ${
-              post.isLiked ? "-active-like" : ""
-            } "data-index="${index}">
-             ${likeImg}
+            <button data-post-id="${post.id}" data-is-liked="${post.isLiked}" class="like-button ${post.isLiked ? "-active-like" : ""} "data-index="${post.user.id}">
+              ${likeImg}
             </button>
-            <p class="post-likes-text">Нравится: <strong>${
-              post.likes.length
-            }</strong></p>
+            <p class="post-likes-text">Нравится: <strong>${likes}</strong></p>
           </div>
           <p class="post-text">
-            <span class="user-name">${post.user.name}</span>: ${
-              post.description
-            }</p>
-          <p class="post-date">${formatDistance(post.createdAt, new Date(), {
-            addSuffix: true,
-            locale: ru,
-          })}</p>
+            <span class="user-name">${post.user.name}</span>: ${post.description}</p>
+          <p class="post-date">${formatDistance(post.createdAt, new Date(), { addSuffix: true, locale: ru })}</p>
         </li>
       `;
     })

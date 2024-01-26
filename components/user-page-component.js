@@ -9,19 +9,18 @@ export function renderUserPostsPage({ posts }) {
   console.log("Cписок постов юзера :", posts);
   let likeImg;
   let likes;
-
+  
   const appElement = document.getElementById("app");
   const postEl = posts
     .map((post) => {
       if (post.likes.length === 1) {
         likes = post.likes[0].name;
-        console.log(post.likes[0].name);
       } else if (post.likes.length > 1) {
         likes = `${post.likes[0].name} и еще ${post.likes.length - 1}`;
       } else {
         likes = "";
       }
-
+      console.log(likes)
       if (post.isLiked) {
         likeImg = '<img src="./assets/images/like-active.svg"></img>';
       } else {
@@ -38,24 +37,15 @@ export function renderUserPostsPage({ posts }) {
         </div>
         <div class="button-container">
           <div class="post-likes">
-            <button data-post-id="${post.id}" data-is-liked="${
-              post.isLiked
-            }" class="like-button ${
-              post.isLiked ? "-active-like" : ""
-            } "data-id="${post.user.id}">
+            <button data-post-id="${post.id}" data-is-liked="${post.isLiked}" class="like-button ${post.isLiked ? "-active-like" : ""} "data-id="${post.user.id}">
               ${likeImg}
             </button>
             <p class="post-likes-text">Нравится: <strong>${likes}</strong></p>
           </div>
           <button  class="delete-form-button header-button logout-button" style="display:none" data-id="${post.id}">Удалить пост</button>
         </div>
-        <p class="post-text"><span class="user-name">${
-          post.user.name
-        }</span>: ${post.description} </p>
-        <p class="post-date">${formatDistance(post.createdAt, new Date(), {
-          addSuffix: true,
-          locale: ru,
-        })}</p>
+        <p class="post-text"><span class="user-name">${post.user.name}</span>: ${post.description} </p>
+        <p class="post-date">${formatDistance(post.createdAt, new Date(), { addSuffix: true, locale: ru })}</p>
       </li>`;
     })
     .join("");
