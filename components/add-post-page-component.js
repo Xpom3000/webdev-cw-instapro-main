@@ -1,7 +1,9 @@
+import { sanitizeHtml } from "../helpers";
 import { renderHeaderComponent } from "./header-component";
 import { renderUploadImageComponent } from "./upload-image-component";
 
 export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
+  let imageUrl = "";
   const render = () => {
     // TODO: Реализовать страницу добавления поста
     const appHtml = `
@@ -24,7 +26,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     appEl.innerHTML = appHtml;
 
     const uploadImageContainer = appEl.querySelector(".upload-image-container");
-    let imageUrl = "";
+    
     if (uploadImageContainer) {
       renderUploadImageComponent({
         element: appEl.querySelector(".upload-image-container"),
@@ -33,9 +35,10 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
         },
       });
     }
+    const description = appEl.querySelector(".textarea")
     document.getElementById("add-button").addEventListener("click", () => {
       onAddPostClick({
-        description: appEl.querySelector(".textarea").value,
+        description: sanitizeHtml(description.value),
         imageUrl,
       });
     });
