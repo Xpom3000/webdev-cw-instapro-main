@@ -12,7 +12,6 @@ export function renderPostsPageComponent() {
   // TODO: реализовать рендер постов из api
   let likeImg;
   let likes;
-  console.log(likes)
   const appElement = document.getElementById("app");
   const appEl = posts
     .map((post, index) => {
