@@ -1,3 +1,4 @@
+import { goToPage, page } from "..";
 import { sanitizeHtml } from "../helpers";
 import { renderHeaderComponent } from "./header-component";
 import { renderUploadImageComponent } from "./upload-image-component";
@@ -38,12 +39,13 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   renderHeaderComponent({ element: document.querySelector(".header-container") });
   
   const uploadImageContainer = appEl.querySelector(".upload-image-container");
-    if (uploadImageContainer) {
-      renderUploadImageComponent({
-        element: appEl.querySelector(".upload-image-container"),
-        onImageUrlChange(newImageUrl) {
-          imageUrl = newImageUrl;
-        },
-      });
-    }
+  if (uploadImageContainer) {
+    renderUploadImageComponent({
+      element: appEl.querySelector(".upload-image-container"),
+      onImageUrlChange(newImageUrl) {
+        imageUrl = newImageUrl;
+      },
+    });
+  }
+  
 }

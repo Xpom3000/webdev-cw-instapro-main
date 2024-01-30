@@ -137,7 +137,7 @@ const renderApp = () => {
 
   if (page === USER_POSTS_PAGE) {
     // TODO: реализована страница фотографий пользвателя
-    return renderUserPostsPage({posts});
+    return renderUserPostsPage({appEl});
   }
 };
 goToPage(POSTS_PAGE);
