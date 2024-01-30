@@ -1,5 +1,6 @@
 // Замени на свой, чтобы получить независимый от других набор данных.
 // "боевая" версия инстапро лежит в ключе prod
+import { sanitizeHtml } from "./helpers.js";
 import { getToken} from "./index.js"
 // const personalKey = "prod";
 const personalKey = "igror-shipitko";
