@@ -21,5 +21,9 @@ export const sanitizeHtml = (htmlString) => {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll("&", "&amp;")
-    .replaceAll('"', "&quot;");
+    .replaceAll('"', "&quot;")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&")
+    .replaceAll('&quot;', "");
 };

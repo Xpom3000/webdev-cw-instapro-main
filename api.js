@@ -2,8 +2,8 @@
 // "боевая" версия инстапро лежит в ключе prod
 import { sanitizeHtml } from "./helpers.js";
 import { getToken} from "./index.js"
-const personalKey = "prod";
-// const personalKey = "igror-shipitko";
+// const personalKey = "prod";
+const personalKey = "igror-shipitko";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 const userHost = `${baseHost}/api/v1/${personalKey}/instapro/user-posts`;

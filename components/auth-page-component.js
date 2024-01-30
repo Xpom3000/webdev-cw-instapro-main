@@ -1,4 +1,5 @@
 import { loginUser, registerUser } from "../api.js";
+import { sanitizeHtml } from "../helpers.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
@@ -68,7 +69,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         }
 
         loginUser({
-          login: login,
+          login: sanitizeHtml(login),
           password: password,
         })
           .then((user) => {

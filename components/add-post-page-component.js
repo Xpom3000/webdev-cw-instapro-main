@@ -24,18 +24,8 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
       `;
 
     appEl.innerHTML = appHtml;
-
-    const uploadImageContainer = appEl.querySelector(".upload-image-container");
     
-    if (uploadImageContainer) {
-      renderUploadImageComponent({
-        element: appEl.querySelector(".upload-image-container"),
-        onImageUrlChange(newImageUrl) {
-          imageUrl = newImageUrl;
-        },
-      });
-    }
-    const description = appEl.querySelector(".textarea")
+    const description = document.getElementById("textarea-input")
     document.getElementById("add-button").addEventListener("click", () => {
       onAddPostClick({
         description: sanitizeHtml(description.value),
@@ -45,5 +35,15 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
   };
 
   render();
-  renderHeaderComponent({element: document.querySelector(".header-container")});
+  renderHeaderComponent({ element: document.querySelector(".header-container") });
+  
+  const uploadImageContainer = appEl.querySelector(".upload-image-container");
+    if (uploadImageContainer) {
+      renderUploadImageComponent({
+        element: appEl.querySelector(".upload-image-container"),
+        onImageUrlChange(newImageUrl) {
+          imageUrl = newImageUrl;
+        },
+      });
+    }
 }

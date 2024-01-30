@@ -13,6 +13,7 @@ import { renderLoadingPageComponent } from "./components/loading-page-component.
 import {
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
+  sanitizeHtml,
   saveUserToLocalStorage,
 } from "./helpers.js";
 import { renderUserPostsPage } from "./components/user-page-component.js";
@@ -115,7 +116,15 @@ const renderApp = () => {
       appEl,
       onAddPostClick({ description, imageUrl }) {
         // TODO: реализовано добавление поста в API
-        addPost ({ description, imageUrl });
+        const textareaInputElement = document.getElementById("textarea-input");
+        addPost({
+          description: sanitizeHtml(textareaInputElement.value),
+          imageUrl
+        })
+        .then((response) => {
+          renderPostsPageComponent()
+        })
+        console.log("Добавляю пост...", { description, imageUrl });
         goToPage(POSTS_PAGE);
       },
     });

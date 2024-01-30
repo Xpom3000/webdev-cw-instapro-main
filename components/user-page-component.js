@@ -65,4 +65,5 @@ export function renderUserPostsPage({ posts }) {
   });
   initLikeLisner(posts[0].user.id);
   // initDeleteButtonLisners({ id });
+  // renderUserPostsPage({ posts });
 }
