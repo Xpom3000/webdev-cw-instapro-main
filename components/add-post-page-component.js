@@ -1,4 +1,3 @@
-import { goToPage, page } from "..";
 import { sanitizeHtml } from "../helpers";
 import { renderHeaderComponent } from "./header-component";
 import { renderUploadImageComponent } from "./upload-image-component";
@@ -37,7 +36,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
   render();
   renderHeaderComponent({ element: document.querySelector(".header-container") });
-  
+    
   const uploadImageContainer = appEl.querySelector(".upload-image-container");
   if (uploadImageContainer) {
     renderUploadImageComponent({
@@ -47,5 +46,4 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
       },
     });
   }
-  
 }

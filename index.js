@@ -55,7 +55,6 @@ export const goToPage = (newPage, data) => {
 
       return getPosts({ token: getToken() })
         .then((newPosts) => {
-          // console.log(newPosts);
           page = POSTS_PAGE;
           posts = newPosts;
           renderApp();
@@ -67,8 +66,6 @@ export const goToPage = (newPage, data) => {
     }
 
     if (newPage === USER_POSTS_PAGE) {
-      // TODO: реализовано получение постов юзера из API
-      // console.log("Открываю страницу пользователя:", data.userId);
       page = LOADING_PAGE;
       renderApp();
       return getUserPosts({ id: data.userId })

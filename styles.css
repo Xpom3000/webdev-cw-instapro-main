@@ -95,10 +95,16 @@
   padding-left: 0px;
   padding-bottom: 5px;
   cursor: pointer;
+  transition: all 0.3s;
+}
+.like-button:hover {
+  transform: scale(1.05);
+  animation: myAnim 2s ease 0s 1 normal forwards;
 }
 .like-active {
-  background-image: url(assets/images/like-active.svg)
+  background-image: url(assets/images/like-active.svg);
 }
+
 .like-not-active {
   background-image: url(assets/images/like-not-active.svg)
 }
@@ -209,4 +215,31 @@
   box-sizing: border-box;
   width: 100%;
   text-align: center;
+}
+
+@keyframes myAnim {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    transform-origin: 50% 100%;
+  }
+  10% {
+    transform: rotate(2deg);
+  }
+  20%,
+  40%,
+  60% {
+    transform: rotate(-4deg);
+  }
+  30%,
+  50%,
+  70% {
+    transform: rotate(4deg);
+  }
+  80% {
+    transform: rotate(-2deg);
+  }
+  90% {
+    transform: rotate(2deg);
+  }
 }
