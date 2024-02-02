@@ -1,4 +1,5 @@
 import { loginUser, registerUser } from "../api.js";
+import { sanitizeHtml } from "../helpers.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { renderUploadImageComponent } from "./upload-image-component.js";
 
@@ -11,47 +12,22 @@ export function renderAuthPageComponent({ appEl, setUser }) {
       <div class="page-container">
           <div class="header-container"></div>
           <div class="form">
-              <h3 class="form-title">
-                ${
-                  isLoginMode
-                    ? "Вход в&nbsp;Instapro"
-                    : "Регистрация в&nbsp;Instapro"
-                }
-                </h3>
-              <div class="form-inputs">
-    
-                  ${
-                    !isLoginMode
-                      ? `
-                      <div class="upload-image-container"></div>
-                      <input type="text" id="name-input" class="input" placeholder="Имя" />
-                      `
-                      : ""
-                  }
-                  
-                  <input type="text" id="login-input" class="input" placeholder="Логин" />
-                  <input type="password" id="password-input" class="input" placeholder="Пароль" />
-                  
-                  <div class="form-error"></div>
-                  
-                  <button class="button" id="login-button">${
-                    isLoginMode ? "Войти" : "Зарегистрироваться"
-                  }</button>
-              </div>
-            
+              <h3 class="form-title">${isLoginMode ? "Вход в&nbsp;Instapro": "Регистрация в&nbsp;Instapro"}</h3>
+              <div class="form-inputs">${!isLoginMode ?`<div class="upload-image-container"></div>
+                <input type="text" id="name-input" class="input" placeholder="Имя" />`: ""}
+                <input type="text" id="login-input" class="input" placeholder="Логин" />
+                <input type="password" id="password-input" class="input" placeholder="Пароль" />
+                <div class="form-error"></div>
+                <button class="button" id="login-button">${isLoginMode ? "Войти" : "Зарегистрироваться"}</button>
+            </div>
               <div class="form-footer">
-                <p class="form-footer-title">
-                  ${isLoginMode ? "Нет аккаунта?" : "Уже есть аккаунт?"}
-                  <button class="link-button" id="toggle-button">
-                    ${isLoginMode ? "Зарегистрироваться." : "Войти."}
-                  </button>
+                <p class="form-footer-title">${isLoginMode ? "Нет аккаунта?" : "Уже есть аккаунт?"}
+                  <button class="link-button" id="toggle-button">${isLoginMode ? "Зарегистрироваться." : "Войти."}</button>
                 </p> 
-               
               </div>
           </div>
       </div>    
 `;
-
     appEl.innerHTML = appHtml;
 
     // Не вызываем перерендер, чтобы не сбрасывалась заполненная форма
@@ -93,7 +69,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         }
 
         loginUser({
-          login: login,
+          login: sanitizeHtml(login),
           password: password,
         })
           .then((user) => {

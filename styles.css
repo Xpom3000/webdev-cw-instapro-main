@@ -52,6 +52,21 @@
   align-items: center;
   margin-bottom: 10px;
   cursor: pointer;
+  transition-duration: .2s;
+}
+/* .product {
+  width: 378px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+  /* max-width: 33.3%;
+   flex-direction: column;
+   flex: 0 0 33.3%;
+   padding: 0 16px;
+   box-sizing: border-box;
+} */
+.post-header:hover {
+  transform-style: initial(1.05);
 }
 
 .post-header__user-image {
@@ -77,6 +92,10 @@
   max-width: 500px;
   object-fit: cover;
 }
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
 
 .post-likes {
   display: flex;
@@ -97,6 +116,10 @@
 }
 .like-not-active {
   background-image: url(assets/images/like-not-active.svg)
+}
+
+.delete-form-button {
+  font-size: 14px;
 }
 
 .user-name {
