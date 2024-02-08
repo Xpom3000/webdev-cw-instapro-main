@@ -66,10 +66,10 @@ export const goToPage = (newPage, data) => {
     }
 
     if (newPage === USER_POSTS_PAGE) {
-      // TODO: реализовано получение постов юзера из API
-      // console.log("Открываю страницу пользователя:", data.userId);
-      page = USER_POSTS_PAGE;
-      renderUserPostsPage();
+
+      page = LOADING_PAGE;
+      renderApp();
+
       return getUserPosts({ id: data.userId })
       .then((newPosts) => {
         page = USER_POSTS_PAGE;
@@ -136,7 +136,7 @@ const renderApp = () => {
 
   if (page === USER_POSTS_PAGE) {
     // TODO: реализована страница фотографий пользвателя
-    return renderUserPostsPage({posts});
+    return renderUserPostsPage({appEl});
   }
 };
 goToPage(POSTS_PAGE);

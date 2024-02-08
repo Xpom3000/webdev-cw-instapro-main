@@ -36,14 +36,14 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
 
   render();
   renderHeaderComponent({ element: document.querySelector(".header-container") });
-  
+    
   const uploadImageContainer = appEl.querySelector(".upload-image-container");
-    if (uploadImageContainer) {
-      renderUploadImageComponent({
-        element: appEl.querySelector(".upload-image-container"),
-        onImageUrlChange(newImageUrl) {
-          imageUrl = newImageUrl;
-        },
-      });
-    }
+  if (uploadImageContainer) {
+    renderUploadImageComponent({
+      element: appEl.querySelector(".upload-image-container"),
+      onImageUrlChange(newImageUrl) {
+        imageUrl = newImageUrl;
+      },
+    });
+  }
 }

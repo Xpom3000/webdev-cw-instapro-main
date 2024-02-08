@@ -2,9 +2,10 @@ import { renderHeaderComponent } from "./header-component";
 import { formatDistance } from "date-fns";
 import { ru } from "date-fns/locale";
 import { initLikeLisner } from "../module/likes";
+import { posts } from "..";
 // import { initDeleteButtonLisners } from "../module/delete";
 
-export function renderUserPostsPage({ posts }) {
+export function renderUserPostsPage() {
   // TODO: реализован рендер постов из api
   console.log("Cписок постов юзера :", posts);
   let likeImg;
