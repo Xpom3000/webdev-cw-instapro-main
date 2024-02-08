@@ -24,7 +24,7 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
       `;
 
     appEl.innerHTML = appHtml;
-
+    
     const description = document.getElementById("textarea-input")
     document.getElementById("add-button").addEventListener("click", () => {
       onAddPostClick({

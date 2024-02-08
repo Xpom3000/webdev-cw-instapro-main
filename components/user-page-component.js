@@ -21,7 +21,7 @@ export function renderUserPostsPage() {
       } else {
         likes = "";
       }
-      console.log(likes)
+      
       if (post.isLiked) {
         likeImg = '<img src="./assets/images/like-active.svg"></img>';
       } else {
@@ -46,7 +46,7 @@ export function renderUserPostsPage() {
           <button  class="delete-form-button header-button logout-button" style="display:none" data-id="${post.id}">Удалить пост</button>
         </div>
         <p class="post-text"><span class="user-name">${post.user.name}</span>: ${post.description} </p>
-        <p class="post-date">${formatDistance(post.createdAt, new Date(), { addSuffix: true, locale: ru })}</p>
+        <p class="post-date">${formatDistance(post.createdAt, {locale: ru})}</p>
       </li>`;
     })
     .join("");

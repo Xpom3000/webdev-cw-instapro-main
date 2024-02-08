@@ -66,18 +66,20 @@ export const goToPage = (newPage, data) => {
     }
 
     if (newPage === USER_POSTS_PAGE) {
+
       page = LOADING_PAGE;
       renderApp();
+
       return getUserPosts({ id: data.userId })
       .then((newPosts) => {
         page = USER_POSTS_PAGE;
         posts = newPosts;
         renderApp();
       })
-      // .catch((error) => {
-      //   console.error(error);
-      //   goToPage(POSTS_PAGE);
-      // });
+      .catch((error) => {
+        console.error(error);
+        goToPage(USER_POSTS_PAGE);
+      });
     }
     page = newPage;
     renderApp();
